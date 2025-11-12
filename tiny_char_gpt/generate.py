@@ -7,7 +7,7 @@ from config import load_config
 from tokenizer_char import CharTokenizer
 from modeling_tinygpt import TinyGPTModel
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
+device = "mps"
 
 
 def load_tokenizer(vocab_path: str, model_max_length: int) -> CharTokenizer:

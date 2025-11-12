@@ -18,6 +18,8 @@ class TinyGPTConfig:
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
 
+    # class method means it can be called on the class itself, not on an instance. 
+    # so we can use TinyGPTConfig.from_dict(...) to create an instance from a dictionary.
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "TinyGPTConfig":
         return cls(**data)

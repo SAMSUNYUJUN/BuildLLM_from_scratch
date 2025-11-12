@@ -1,5 +1,9 @@
 # Tiny Char-GPT
 
+This project aims at structuring the simple GPT that is written by Andrej Karpathy into the modern LLM file splitting structure.
+By look at this project, you will get a basic understanding on what each part of the LLM is doing, and what each of the json file
+is about when you downloading a LLM from hugging face.
+
 This is a tiny character-level GPT model trained on `input.txt`
 (typically the Tiny Shakespeare corpus).  
 Code is split into the following files:
