@@ -1,4 +1,1 @@
-{
-  "tokenizer_class": "CharTokenizer",
-  "model_max_length": 32
-}
+{"vocab_size": 1000, "num_special": 4, "special_tokens": {"pad": 0, "bos": 1, "eos": 2, "unk": 3}, "special_strings": {"pad": "<pad>", "bos": "<bos>", "eos": "<eos>", "unk": "<unk>"}, "use_regex_pretokenize": true, "pattern": "'s|'t|'re|'ve|'m|'ll|'d| ?\\p{L}+| ?\\p{N}+| ?[^\\s\\p{L}\\p{N}]+|\\s+(?!\\S)|\\s+"}
