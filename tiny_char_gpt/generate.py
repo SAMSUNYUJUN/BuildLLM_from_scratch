@@ -6,13 +6,9 @@ from safetensors.torch import load_file
 from config import load_config
 from tokenizer_char import CharTokenizer
 from modeling_tinygpt import TinyGPTModel
+from tokenizer_BPE import bpe_tokenizer
 
 device = "mps"
-
-
-def load_tokenizer(vocab_path: str, model_max_length: int) -> CharTokenizer:
-    return CharTokenizer.from_vocab(vocab_path, model_max_length=model_max_length)
-
 
 def main():
     # 1. load configs
@@ -22,7 +18,7 @@ def main():
         gen_cfg = json.load(f)
     max_new_tokens = int(gen_cfg.get("max_new_tokens", 200))
 
-    tokenizer = load_tokenizer("vocab.json", model_max_length=config.block_size)
+    tokenizer = bpe_tokenizer.from_files("bpe_merges.json", "bpe_vocab.json", "tokenizer_config.json")
 
     # 2. load model weights
     model = TinyGPTModel(config)

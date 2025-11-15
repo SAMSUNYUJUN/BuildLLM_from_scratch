@@ -342,9 +342,9 @@ class bpe_tokenizer:
 
 
 if __name__ == "__main__":
-    with open("tiny_char_gpt/input.txt", "r", encoding="utf-8") as f:
-        txt = f.read()
-    tok = bpe_tokenizer(txt, vocab_size=1000)
+    # with open("tiny_char_gpt/input.txt", "r", encoding="utf-8") as f:
+    #     txt = f.read()
+    #tok = bpe_tokenizer(txt, vocab_size=1000)
 
     # ids = tok.encode("Hello, world!", add_special_tokens=True)
     # print("ids:", ids)

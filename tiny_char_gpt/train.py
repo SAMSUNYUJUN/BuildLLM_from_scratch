@@ -4,8 +4,8 @@ import torch
 from safetensors.torch import save_file
 
 from config import TinyGPTConfig, save_config
-from tokenizer_char import train_tokenizer_from_file, save_tokenizer_config
 from modeling_tinygpt import TinyGPTModel
+from tokenizer_BPE import bpe_tokenizer
 
 # ----------------- training hyperparameters -----------------
 batch_size = 16
@@ -19,11 +19,15 @@ device = "mps"
 
 torch.manual_seed(1337)
 
-# 1. tokenizer + raw corpus
-tokenizer, text = train_tokenizer_from_file("../input.txt", model_max_length=block_size)
+tokenizer = bpe_tokenizer.from_files("bpe_merges.json", "bpe_vocab.json", "tokenizer_config.json")
+with open("tiny_char_gpt/input.txt", "r", encoding="utf-8") as f:
+    text = f.read()
+# tokenizer, text = train_tokenizer_from_file("../input.txt", model_max_length=block_size)
 
-# 2. dataset split
-data = torch.tensor(tokenizer.encode(text), dtype=torch.long)
+# 2. dataset split.
+
+# Note that for self-regressive language modeling, we don't need special tokens.
+data = torch.tensor(tokenizer.encode(text, add_special_tokens=False), dtype=torch.long)
 n = int(0.9 * len(data))
 train_data = data[:n]
 val_data = data[n:]
@@ -104,11 +108,7 @@ with open("model.safetensors.index.json", "w", encoding="utf-8") as f:
 # 6. save config.json
 save_config(config, "config.json")
 
-# 7. save tokenizer files
-tokenizer.save_vocab("vocab.json")
-save_tokenizer_config("tokenizer_config.json", model_max_length=block_size)
-
-# 8. save generation_config.json
+# 7. save generation_config.json
 generation_config = {
     "max_new_tokens": 200,
     "do_sample": True,
