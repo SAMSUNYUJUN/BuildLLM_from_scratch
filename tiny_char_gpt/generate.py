@@ -4,7 +4,6 @@ import torch
 from safetensors.torch import load_file
 
 from config import load_config
-from tokenizer_char import CharTokenizer
 from modeling_tinygpt import TinyGPTModel
 from tokenizer_BPE import bpe_tokenizer
 
